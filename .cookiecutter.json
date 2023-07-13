@@ -1,0 +1,15 @@
+{
+    "_copy_without_render": [
+        "*.github"
+    ],
+    "_template": "https://github.com/MartinBernstorff/swift-python-cookiecutter",
+    "author": "Jonathan Rystr\u00f8m",
+    "copyright_year": "2023",
+    "email": "jhvithamar@gmail.com",
+    "friendly_name": "Batchata",
+    "github_user": "rysias",
+    "license": "MIT",
+    "package_name": "batchata",
+    "project_name": "batchata",
+    "version": "0.0.0"
+}
