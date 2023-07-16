@@ -49,6 +49,7 @@ class Batch:
         self,
         text_to_batch: Iterable,
     ) -> Generator[Iterable[str], None, None]:
+        """Batch for concurrent models"""
         batch_size = (
             self.concurrent_size
             if self.concurrent_size is not None
