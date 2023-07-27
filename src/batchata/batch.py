@@ -1,4 +1,5 @@
 from collections.abc import Generator, Iterable
+from typing import Optional
 
 from .count import count_tokens
 
@@ -7,8 +8,8 @@ class Batch:
     def __init__(
         self,
         rate_limit: int = 1,
-        token_limit: int | None = None,
-        concurrent_size: int | None = None,
+        token_limit: Optional[int] = None,
+        concurrent_size: Optional[int] = None,
     ):
         """Batch that can account for both rate_limit and token_limit"""
         self.rate_limit = rate_limit
