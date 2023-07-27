@@ -65,7 +65,7 @@ class Batch:
             yield batch
 
     @classmethod
-    def from_model(cls: "Batch", model_name: str) -> "Batch":
+    def from_model(cls, model_name: str) -> "Batch":  # noqa: ANN102
         """Create a Batch from a model name"""
         if model_name == "gpt-3.5-turbo":
             return cls(rate_limit=3500, token_limit=90_000, concurrent_size=None)
