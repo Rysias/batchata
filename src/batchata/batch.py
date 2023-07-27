@@ -1,4 +1,4 @@
-from collections.abc import Generator, Iterable
+from collections.abc import Generator, Sequence
 
 from .count import count_tokens
 
@@ -21,8 +21,8 @@ class Batch:
 
     def batch_rate(
         self,
-        text_to_batch: Iterable,
-    ) -> Generator[Iterable[str], None, None]:
+        text_to_batch: Sequence,
+    ) -> Generator[list[str], None, None]:
         """Batch while accounting for both rate_limit and token_limit"""
         current_tokens = 0
         rate_count = 0
@@ -47,8 +47,8 @@ class Batch:
 
     def batch_concurrent(
         self,
-        text_to_batch: Iterable,
-    ) -> Generator[Iterable[str], None, None]:
+        text_to_batch: Sequence,
+    ) -> Generator[list[str], None, None]:
         """Batch for concurrent models"""
         batch_size = (
             self.concurrent_size
