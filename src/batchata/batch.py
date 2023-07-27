@@ -1,5 +1,4 @@
-from collections.abc import Generator, Iterable
-from typing import Optional
+from collections.abc import Generator, Sequence
 
 from .count import count_tokens
 
@@ -8,8 +7,8 @@ class Batch:
     def __init__(
         self,
         rate_limit: int = 1,
-        token_limit: Optional[int] = None,
-        concurrent_size: Optional[int] = None,
+        token_limit: int | None = None,
+        concurrent_size: int | None = None,
     ):
         """Batch that can account for both rate_limit and token_limit"""
         self.rate_limit = rate_limit
@@ -22,8 +21,8 @@ class Batch:
 
     def batch_rate(
         self,
-        text_to_batch: Iterable,
-    ) -> Generator[Iterable[str], None, None]:
+        text_to_batch: Sequence,
+    ) -> Generator[list[str], None, None]:
         """Batch while accounting for both rate_limit and token_limit"""
         current_tokens = 0
         rate_count = 0
@@ -48,8 +47,8 @@ class Batch:
 
     def batch_concurrent(
         self,
-        text_to_batch: Iterable,
-    ) -> Generator[Iterable[str], None, None]:
+        text_to_batch: Sequence,
+    ) -> Generator[list[str], None, None]:
         """Batch for concurrent models"""
         batch_size = (
             self.concurrent_size
@@ -66,7 +65,7 @@ class Batch:
             yield batch
 
     @classmethod
-    def from_model(cls: "Batch", model_name: str) -> "Batch":
+    def from_model(cls, model_name: str) -> "Batch":  # noqa: ANN102
         """Create a Batch from a model name"""
         if model_name == "gpt-3.5-turbo":
             return cls(rate_limit=3500, token_limit=90_000, concurrent_size=None)
